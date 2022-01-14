@@ -1,43 +1,6 @@
-class Game {
-    constructor() {
-        this.answers = {
-            "0": "Да, вы угадали!",
-            "1": "Больше",
-            "-1" : "Меньше"
-        }
-        this.difficultyLevels = {
-            "easy": 15,
-            "medium": 10,
-            "hard" : 8,
-            "impossible": 8
-        }
-        // this.level = "easy";
-        this.startNewGame();
-    }
+import {Game} from "./Game.js";
 
-    startNewGame() {
-        this.guessingNumber = getRandomIntInclusive(1, 100);
-        this.chooseGameLevel();
-    }
-
-    chooseGameLevel() {
-        this.attemptCount = this.difficultyLevels[this.level];
-        renderNewGameAttempts(this.attemptCount, this.guessingNumber);
-    }
-
-    decreaseAttemptCount() {
-        this.attemptCount--;
-    }
-
-    compareNumberWithGuessingNumber(trialNumber) {
-        return {
-            isGuessed: compareNumbers(trialNumber, this.guessingNumber) === 0,
-            str: this.answers[compareNumbers(trialNumber, this.guessingNumber)]
-        }
-    }
-}
-
-const guessNumberGame = new Game();
+const guessNumberGame = new Game(renderNewGameAttempts);
 
 document.querySelector(".begin-game").addEventListener("click", (e) => {
     let hideElements = document.querySelector(".begin-game__container");
@@ -53,14 +16,14 @@ document.querySelector(".controls__check-number").addEventListener("click", (e) 
 })
 
 document.querySelector(".controls__start-new-game").addEventListener("click", (e) => {
-    guessNumberGame.startNewGame();
+    guessNumberGame.startNewGame(renderNewGameAttempts);
     document.querySelector(".game-field__history__list").innerHTML = "";
     document.querySelector(".game-field__result").innerHTML = "";
 })
 
 document.getElementById("easy-lvl").addEventListener("click", () => {
     guessNumberGame.level = "easy";
-    guessNumberGame.chooseGameLevel();
+    guessNumberGame.chooseGameLevel(renderNewGameAttempts);
     hideAndDisplayElements(
         ".choose-level__container",
         ".game-field"
@@ -68,7 +31,7 @@ document.getElementById("easy-lvl").addEventListener("click", () => {
 })
 document.getElementById("medium-lvl").addEventListener("click", () => {
     guessNumberGame.level = "medium";
-    guessNumberGame.chooseGameLevel();
+    guessNumberGame.chooseGameLevel(renderNewGameAttempts);
     hideAndDisplayElements(
         ".choose-level__container",
         ".game-field"
@@ -77,7 +40,7 @@ document.getElementById("medium-lvl").addEventListener("click", () => {
 
 document.getElementById("hard-lvl").addEventListener("click", () => {
     guessNumberGame.level = "hard";
-    guessNumberGame.chooseGameLevel();
+    guessNumberGame.chooseGameLevel(renderNewGameAttempts);
     hideAndDisplayElements(
         ".choose-level__container",
         ".game-field"
@@ -86,7 +49,7 @@ document.getElementById("hard-lvl").addEventListener("click", () => {
 
 // document.getElementById("impossible-lvl").addEventListener("click", () => {
 //     guessNumberGame.level = "impossible";
-//     guessNumberGame.chooseGameLevel();
+//     guessNumberGame.chooseGameLevel(renderNewGameAttempts);
 //     hideAndDisplayElements(
 //         ".choose-level__container",
 //         ".game-field"
@@ -113,7 +76,7 @@ function checkNumber(game){
         return;
     }
     let trialNumber = parseInt(inputNumber.value, 10);
-    result = game.compareNumberWithGuessingNumber(trialNumber);
+    let result = game.compareNumberWithGuessingNumber(trialNumber);
 
     addResultToThePage(result.str);
     addActionToHistory(trialNumber, result.str);
@@ -172,38 +135,3 @@ function addActionToHistory(trialNumber, result){
     historyList.appendChild(li);
 }
 
-function guessNumberWithPrompt(){
-
-    const guessingNumber = getRandomIntInclusive(1, 100);
-    let result;
-    console.log(guessingNumber);
-    const answers = {
-        "0": "Да, вы угадали!",
-        "1": "Больше",
-        "-1" : "Меньше"
-    }
-
-    do {
-        let trialNumber = parseInt(prompt("Пробуем угадать?"), 10);
-        result = answers[compareNumbers(trialNumber, guessingNumber)];
-        alert(result);
-    } while (result !== "Да, вы угадали!");
-
-    alert("Поздравляем! Вы выиграли");
-}
-
-function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
-}
-
-function compareNumbers(trialNumber, guessingNumber) {
-    if (trialNumber === guessingNumber) {
-        return 0
-    } else if (trialNumber < guessingNumber) {
-        return 1
-    } else {
-        return -1
-    }
-}
