@@ -1,0 +1,19 @@
+{
+  "name": "guess-number",
+  "version": "1.0.0",
+  "description": "Game where you shoud guess number",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "open -a \"Google Chrome\" index.html "
+  },
+  "keywords": [
+    "guess",
+    "number",
+    "game",
+    "begginer",
+    "js"
+  ],
+  "author": "Anastasia Iljushchenko",
+  "license": "ISC"
+}

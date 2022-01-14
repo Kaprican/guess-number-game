@@ -1,0 +1,94 @@
+html {
+    font-family: 'Montserrat', sans-serif;
+    color: #00214d;
+}
+
+button {
+    padding: 10px;
+    background-color: #00ebc7;
+    border: none;
+    border-radius: 5px;
+    color: #00214d;
+}
+
+.begin-game__container {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+.choose-level__container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.choose-level__container h1 {
+    text-align: center;
+}
+
+.level-container {
+    margin: 0 auto;
+    display: flex;
+    gap: 1vh;
+    flex-direction: column;
+}
+
+.level-container__item {
+    font-size: 2em;
+    padding: 1vmax;
+}
+
+.begin-game {
+    font-size: 5em;
+    padding: 2vmax;
+}
+
+input {
+    border: none;
+    border-bottom: 1px solid #00214d;
+    line-height: 2;
+}
+
+.controls {
+    display: flex;
+    column-gap: 1vw;
+    align-items: stretch;
+}
+
+.controls__start-new-game {
+    background-color: blueviolet;
+    color: white;
+}
+
+.controls__start-new-game svg path{
+    fill: white;
+}
+
+.game-field__states span{
+    color: blueviolet;
+}
+
+.end-game {
+    width: 300px;
+    text-align: center;
+    padding: 15px;
+    background-color: white;
+    border: 3px solid #00214d;
+    border-radius: 10px;
+    color: #00214d;
+}
+
+.game-result {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 33, 77, .5);
+    display: grid;
+    place-items: center;
+}
+
+.game-field, .game-result, .choose-level__container {
+    display: none;
+}
